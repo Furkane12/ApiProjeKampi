@@ -9,8 +9,14 @@ namespace ApiProjeKampi.WebApi.Controllers
 	[ApiController]
 	public class CategoriesController : ControllerBase
 	{
+		//ApiContext nesnesi dependency injection ile alınıyor
+		//Bu sayede veritabanı işlemleri için kullanılabilir
+		//readonly alan olarak tanımlanıyor
+		//Bu, alanın yalnızca constructor içinde atanabileceği ve sonrasında değiştirilemeyeceği anlamına gelir
+		//ApiContext sınıfından _contex isminde field tanımlanıyor
 		private readonly ApiContext _context;
 
+		//Constructor
 		public CategoriesController(ApiContext context)
 		{
 			_context = context;
