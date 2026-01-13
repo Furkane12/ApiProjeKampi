@@ -44,7 +44,12 @@ namespace ApiProjeKampi.WebApi.Controllers
 		public IActionResult DeleteCategory(int id)
 		{
 			var value = _context.Categories.Find(id);
-			_context.Categories.Remove(value);
+            // Kontrol: Eğer value null ise, yani belirtilen ID'ye sahip bir kategori bulunamazsa NotFound döndürülür.
+            if (value == null)
+			{
+				return NotFound("Kategori Bulunamadı.");
+            }
+            _context.Categories.Remove(value);
 			_context.SaveChanges();
 			return Ok("Kategori Silme İşlemi Yapıldı!");
 		}
@@ -55,6 +60,11 @@ namespace ApiProjeKampi.WebApi.Controllers
 		public IActionResult GetCategory(int id)
 		{
 			var value = _context.Categories.Find(id);
+            // Kontrol: Eğer value null ise, yani belirtilen ID'ye sahip bir kategori bulunamazsa NotFound döndürülür.
+            if (value == null)
+			{
+				return NotFound("Kategori Bulunamadı.");
+            }
 			return Ok(value);
 		}
 
@@ -63,9 +73,17 @@ namespace ApiProjeKampi.WebApi.Controllers
 		public IActionResult UpdateCategory(Category category)
 		{
 			var value = _context.Categories.Find(category.CategoryId);
-			value.CategoryName = category.CategoryName;
-			_context.SaveChanges();
-			return Ok("Kategori Güncelleme İşlemi Tamamlandı.");
+            // Kontrol: Eğer value null ise, yani belirtilen ID'ye sahip bir kategori bulunamazsa NotFound döndürülür.
+            if (value == null)
+			{
+				return NotFound("Kategori Bulunamadı.");
+            }
+            else
+            {
+                value.CategoryName = category.CategoryName;
+                _context.SaveChanges();
+                return Ok("Kategori Güncelleme İşlemi Tamamlandı.");
+            }       
 		}
 	}
 }
