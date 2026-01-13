@@ -26,59 +26,94 @@ namespace ApiProjeKampi.WebApi.Controllers
         [HttpGet("ChefList")]
         public IActionResult ChefList()
         {
-            var values = _context.Chefs.ToList();
-            return Ok(values);
+            try
+            {
+                var values = _context.Chefs.ToList();
+                return Ok(values);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Hata: " + ex.Message);
+            }
         }
         //Burada Chef tablosuna swagger ile veri ekleme işlemi yaptık.
         [HttpPost("CreateChef")]
         public IActionResult CreateChef(Chef chefs)
         {
-            _context.Chefs.Add(chefs);
-            _context.SaveChanges();
-            return Ok("Şef Sisteme Eklendi!");
+            try
+            {
+                _context.Chefs.Add(chefs);
+                _context.SaveChanges();
+                return Ok("Şef Sisteme Eklendi!");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest("Hata: " + ex.Message);
+            }
         }
         //Burada Chef tablosundaki verileri silme işlemi yaptık.
         [HttpDelete("DeleteChef")]
         public IActionResult DeleteChef(int id)
         {
-            var value = _context.Chefs.Find(id);
-            // Kontrol: Eğer value null ise, yani belirtilen ID'ye sahip bir şef bulunamazsa NotFound döndürülür.
-            if (value == null)
+            try
             {
-                return NotFound("Şef Bulunamadı!");
+                var value = _context.Chefs.Find(id);
+                // Kontrol: Eğer value null ise, yani belirtilen ID'ye sahip bir şef bulunamazsa NotFound döndürülür.
+                if (value == null)
+                {
+                    return NotFound("Şef Bulunamadı!");
+                }
+                _context.Chefs.Remove(value);
+                _context.SaveChanges();
+                return Ok("Şef Sistemden Başarıyla Silindi!");
             }
-            _context.Chefs.Remove(value);
-            _context.SaveChanges();
-            return Ok("Şef Sistemden Başarıyla Silindi!");
+            catch (Exception ex)
+            {
+                return BadRequest("Hata: " + ex.Message);
+            }
         }
         //Burada Chef tablosundaki verileri güncelleme işlemi yaptık.
         [HttpPut("UpdateChef")]
         public IActionResult UpdateChef(Chef chefs)
         {
-            var values = _context.Chefs.Find(chefs.ChefId);
-            // Kontrol: Eğer values null ise, yani belirtilen ID'ye sahip bir şef bulunamazsa NotFound döndürülür.
-            if (values == null)
+            try
             {
-                return NotFound("Şef Bulunamadı!");
+                var values = _context.Chefs.Find(chefs.ChefId);
+                // Kontrol: Eğer values null ise, yani belirtilen ID'ye sahip bir şef bulunamazsa NotFound döndürülür.
+                if (values == null)
+                {
+                    return NotFound("Şef Bulunamadı!");
+                }
+                values.NameSurname = chefs.NameSurname;
+                values.Title = chefs.Title;
+                values.Description = chefs.Description;
+                values.ImageUrl = chefs.ImageUrl;
+                _context.SaveChanges();
+                return Ok("Şef Sistemde Başarıyla Güncellendi!");
             }
-            values.NameSurname = chefs.NameSurname;
-            values.Title = chefs.Title;
-            values.Description = chefs.Description;
-            values.ImageUrl = chefs.ImageUrl;
-            _context.SaveChanges();
-            return Ok("Şef Sistemde Başarıyla Güncellendi!");
+            catch (Exception ex)
+            {
+                return BadRequest("Hata: " + ex.Message);
+            }
         }
         //Burada Chef tablosundaki verileri ID`ye göre getirme işlemi yaptık.
         [HttpGet("GetChefs")]
         public IActionResult GetChefs(int id)
         {
-            var value = _context.Chefs.Find(id);
-            // Kontrol: Eğer value null ise, yani belirtilen ID'ye sahip bir şef bulunamazsa NotFound döndürülür.
-            if (value == null)
+            try
             {
-                return NotFound("Şef Bulunamadı!");
+                var value = _context.Chefs.Find(id);
+                // Kontrol: Eğer value null ise, yani belirtilen ID'ye sahip bir şef bulunamazsa NotFound döndürülür.
+                if (value == null)
+                {
+                    return NotFound("Şef Bulunamadı!");
+                }
+                return Ok(value);
             }
-            return Ok(value);
+            catch (Exception ex)
+            {
+                return BadRequest("Hata: " + ex.Message);
+            }
         }
     }
 }
