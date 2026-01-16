@@ -98,7 +98,7 @@ namespace ApiProjeKampi.WebApi.Controllers
 				{
 					return NotFound("Mesaj Bulunamadı!");
 				}
-				_mapper.Map<UpdateMessageDto>(value);
+				_mapper.Map(updateMessageDto, value);
 				_context.SaveChanges();
 				return Ok("Mesaj Güncellendi!");
 
