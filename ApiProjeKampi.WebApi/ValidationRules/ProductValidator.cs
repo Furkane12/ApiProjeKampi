@@ -1,10 +1,11 @@
-﻿using ApiProjeKampi.WebApi.Entities;
+﻿using ApiProjeKampi.WebApi.Dtos.ProductDtos;
+using ApiProjeKampi.WebApi.Entities;
 using FluentValidation;
 
 namespace ApiProjeKampi.WebApi.ValidationRules
 {
 	//AbstractValidator sınıfından miras alacak bu sınıftan kim miras alacak? Product sınıfım.
-	public class ProductValidator : AbstractValidator<Product>
+	public class ProductValidator : AbstractValidator<CreateProductsDto>
 	{
 		//FluentValidation`a ait metotları kullanabilmek için constractor oluşturduk.
 		public ProductValidator()
