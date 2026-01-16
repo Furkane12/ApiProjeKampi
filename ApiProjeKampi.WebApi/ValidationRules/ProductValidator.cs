@@ -1,6 +1,7 @@
 ﻿using ApiProjeKampi.WebApi.Dtos.ProductDtos;
 using ApiProjeKampi.WebApi.Entities;
 using FluentValidation;
+using AutoMapper;
 
 namespace ApiProjeKampi.WebApi.ValidationRules
 {

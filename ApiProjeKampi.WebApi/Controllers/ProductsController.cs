@@ -17,7 +17,7 @@ namespace ApiProjeKampi.WebApi.Controllers
         private readonly ApiContext _context;
         private readonly IMapper _mapper;
 
-        public ProductsController(IValidator validator, ApiContext context,IMapper mapper)
+        public ProductsController(IValidator<CreateProductsDto> validator, ApiContext context, IMapper mapper)
         {
             _validator = validator;
             _context = context;

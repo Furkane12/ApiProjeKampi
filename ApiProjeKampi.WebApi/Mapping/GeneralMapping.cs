@@ -3,6 +3,7 @@ using ApiProjeKampi.WebApi.Dtos.MessageDtos;
 using ApiProjeKampi.WebApi.Dtos.ProductDtos;
 using ApiProjeKampi.WebApi.Entities;
 using AutoMapper;
+using FluentValidation;
 
 namespace ApiProjeKampi.WebApi.Mapping
 {
